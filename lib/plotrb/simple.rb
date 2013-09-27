@@ -61,8 +61,9 @@ module Plotrb
     #
     # Generate a simple 2d scatter plot.
     #
-    # @param [NMatrix, Array] x the x datapoints; will be flattened if a
-    #   multidimensional array/matrix
+    # @param [NMatrix, Array] x the x datapoints; if a single row, will be used
+    #   for all y dataseries, if multiple rows, each row of x will be used for
+    #   the corresponding row of y
     # @param [NMatrix, Array] y the y datapoints.  Can be a single dimensional array,
     #   or 2D with multiple series in rows; column dimension should match the
     #   number of elements in x.
@@ -103,18 +104,39 @@ module Plotrb
       height = kwargs[:height]
       domain = kwargs[:domain]
       range = kwargs[:range]
-
+      
       datapoints = []
       n_sets = 1
-      if y.respond_to?(:shape) and y.shape.length > 1 then
+      x_n_sets = 1
+      x_size = x.size
+
+      if x.respond_to?(:shape) and x.shape.length > 1 then  # x is 2D NMatrix
+        x_n_sets = x.shape[0]
+        x_size = x.shape[1]
+      elsif x.instance_of? Array and x[0].instance_of? Array then # x is nested Array
+        x_n_sets = x.size
+        x_size = x[0].size
+      end
+
+      if y.respond_to?(:shape) and y.shape.length > 1 then # y is 2D NMatrix
         n_sets = y.shape[0]
-      elsif y.instance_of? Array and y[0].instance_of? Array then
+      elsif y.instance_of? Array and y[0].instance_of? Array then # y is nested array
         n_sets = y.size
       end
 
-      x.to_a.each_with_index do |xx, i|
-        dp = {x: xx}
+      x_size.times do |i|
+        dp = {}
         n_sets.times do |j|
+
+          xj = j.modulo(x_n_sets)
+          if x.respond_to?(:shape) and x.shape.length > 1 then
+            dp["x#{xj}".to_sym] = x[xj, i]
+          elsif x.instance_of? Array and x[0].instance_of? Array then
+            dp["x#{xj}".to_sym] = x[xj][i]
+          else
+            dp["x#{xj}".to_sym] = x[i]
+          end
+
           indices = [i]
           if y.respond_to?(:shape) and y.shape.length > 1 then
             indices = [j,i]
@@ -125,6 +147,7 @@ module Plotrb
             dp["y#{j}".to_sym] = y[*indices]
           end
         end
+
         datapoints << dp
       end
 
@@ -132,7 +155,7 @@ module Plotrb
       dataset= Plotrb::Data.new.name(scatter_data_name)
       dataset.values(datapoints)
 
-      domain_in = "#{scatter_data_name}.x"
+      domain_in = "#{scatter_data_name}.x0"
       if domain then
         domain_in = domain
       end
@@ -151,8 +174,9 @@ module Plotrb
         marks << symbol_mark.from(dataset) do
           c_j = color.instance_of?(Array) ? color[j] : color
           s_j = symbol.instance_of?(Array) ? symbol[j] : symbol
+          x_j = j.modulo(x_n_sets)
           enter do
-            x_start { scale(xs).from('x') }
+            x_start { scale(xs).from("x#{x_j}") }
             y_start { scale(ys).from("y#{j}") }
             size markersize
             shape s_j
