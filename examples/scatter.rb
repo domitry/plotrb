@@ -1,6 +1,6 @@
 require 'plotrb'
 
-raw_data = pdata.name('iris').url('data/iris.json')
+raw_data = pdata.name('iris').url('iris_data.json')
 xs = linear_scale.name('x').from('iris.sepalWidth').to_width.nicely
 ys = linear_scale.name('y').from('iris.petalLength').to_height.nicely
 cs = ordinal_scale.name('c').from('iris.species').range(["#800", "#080", "#008"])
