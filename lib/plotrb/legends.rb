@@ -69,6 +69,10 @@ module Plotrb
 			process_orient
 			process_format
 			process_properties
+			process_size
+			process_shape
+			process_fill
+			process_stroke
 		end		
 		
 		def process_orient
