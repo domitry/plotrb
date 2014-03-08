@@ -93,6 +93,63 @@ module Plotrb
 			end
 		end
 		
+		def process_size
+			return unless @size
+			case @size
+				when String
+					unless ::Plotrb::Kernel.find_scale(@size)
+					raise ArgumentError, 'Scale not found'
+					end
+				when ::Plotrb::Scale
+					@size = @size.name
+				else
+					raise ArgumentError, 'Unknown Scale'
+			end
+		end
+
+		def process_shape
+			return unless @shape
+			case @shape
+				when String
+					unless ::Plotrb::Kernel.find_scale(@shape)
+					raise ArgumentError, 'Scale not found'
+					end
+				when ::Plotrb::Scale
+					@shape = @shape.name
+				else
+					raise ArgumentError, 'Unknown Scale'
+			end
+		end
+		
+		def process_fill
+			return unless @fill
+			case @fill
+				when String
+					unless ::Plotrb::Kernel.find_scale(@fill)
+					raise ArgumentError, 'Scale not found'
+					end
+				when ::Plotrb::Scale
+					@fill = @fill.name
+				else
+					raise ArgumentError, 'Unknown Scale'
+			end
+		end
+		
+		def process_stroke
+			return unless @stroke
+			case @stroke
+				when String
+					unless ::Plotrb::Kernel.find_scale(@stroke)
+					raise ArgumentError, 'Scale not found'
+					end
+				when ::Plotrb::Scale
+					@stroke = @stroke.name
+				else
+					raise ArgumentError, 'Unknown Scale'
+			end
+		end		
+
+		
 		def process_properties
 			return unless @properties
 			valid_elements = %i(title labels symbols gradient legend)

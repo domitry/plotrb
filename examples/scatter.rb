@@ -8,7 +8,7 @@ cs = ordinal_scale.name('c').from('iris.species').range(["#800", "#080", "#008"]
 xaxis = x_axis.scale(xs).offset(5).ticks(5).title('Sepal Width')
 yaxis = y_axis.scale(ys).offset(5).ticks(5).title('Petal Length')
 
-legends = legend.fill(cs).title('Species') do
+lgnd = legend.fill(cs).title('Species') do
 	properties(:symbols) do
 		fill_opacity 0.5
         stroke :transparent
@@ -32,11 +32,12 @@ mark = symbol_mark.from(raw_data) do
 	end
 end
 
-@vis = visualization.name('arc').width(200).height(200) do
+vis = visualization.name('arc').width(200).height(200) do
 	data raw_data
 	scales xs, ys, cs
 	axes xaxis, yaxis
+	legends lgnd
 	marks mark
 end
 
-puts @vis.generate_spec(:pretty)
+puts vis.generate_spec(:pretty)
