@@ -25,12 +25,14 @@ module Plotrb
     #   @return [Array<Marks>] the marks for visualization
     # @!attributes axes
     #   @return [Array<Axis>] the axes for visualization
+    # @!attributes legends
+    #   @return [Array<Legend>] the legends for visualization
     add_attributes :name, :width, :height, :viewport, :padding, :data, :scales,
-                  :marks, :axes
+                  :marks, :axes, :legends
 
     def initialize(&block)
       define_single_val_attributes(:name, :width, :height, :viewport, :padding)
-      define_multi_val_attributes(:data, :scales, :marks, :axes)
+      define_multi_val_attributes(:data, :scales, :marks, :axes, :legends)
       self.instance_eval(&block) if block_given?
     end
 
