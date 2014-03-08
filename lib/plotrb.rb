@@ -11,6 +11,7 @@ require_relative 'plotrb/marks'
 require_relative 'plotrb/axes'
 require_relative 'plotrb/kernel'
 require_relative 'plotrb/visualization'
+require_relative 'plotrb/legends'
 
 module Plotrb
 

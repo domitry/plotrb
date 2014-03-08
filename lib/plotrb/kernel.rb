@@ -57,6 +57,11 @@ module Plotrb
     def self.transforms
       @transforms ||= []
     end
+    
+    # a global space keeping track of all Transform objects defined
+	def self.legends
+	  @legends ||= []
+	end
 
     # Initialize ::Plotrb::Visualization object
 
@@ -68,6 +73,10 @@ module Plotrb
 
     def pdata(&block)
       ::Plotrb::Data.new(&block)
+    end
+    
+    def legend(&block)
+	  ::Plotrb::Legend.new(&block)
     end
 
     def method_missing(method, *args, &block)
