@@ -20,7 +20,9 @@ module Plotrb
 		# @!attribute title
 		#   @return [Symbol] the title for the legend
 		# @!attribute format
-		#   @return [Symbol] an optional formatting pattern for legend labels
+		#   @return [String] an optional formatting pattern for legend labels
+		# @!attribute offset
+		#   @return [Integer] the offset of the legend
 		#  @!attribute values
 		#   @return [Array] explicitly set the visible legend values
 		# @!attributes properties
