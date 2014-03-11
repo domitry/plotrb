@@ -3,8 +3,7 @@ require_relative '../spec_helper'
 describe 'Legend' do
 	subject { ::Plotrb::Legend.new }
 	
-	describe '#size' do
-		
+	describe '#size' do		
 		it 'sets the scale backing the legend size by name' do
 			subject.size('foo_scale')
 			subject.size.should == 'foo_scale'
@@ -151,7 +150,6 @@ describe 'Legend' do
 		end
 
   end
-	
-	
-
+  
 end
+
