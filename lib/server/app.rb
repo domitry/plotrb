@@ -1,4 +1,4 @@
-require 'sinatra/base'
+require 'sinatra'
 require 'erb'
 
 class PlotrbApp < Sinatra::Base
@@ -17,9 +17,8 @@ class PlotrbApp < Sinatra::Base
     end
 
     def save_file(file_name, content)
-      path = @data_dir + "/" + file_name
-      file = File::open(path, "w")
-      file.write content
+      path = @data_dir + "/" + file_name + ".js"
+      File.write(path, content)
     end
   end
 

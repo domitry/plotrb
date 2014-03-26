@@ -1,4 +1,4 @@
-require 'plotrb'
+require './lib/plotrb.rb'
 
 data = pdata.name('table').values(
 	[
@@ -45,4 +45,4 @@ vis = visualization.name('area').width(500).height(200) do
 	marks mark
 end
 
-puts vis.generate_spec(:pretty)
+vis.output_server("area")

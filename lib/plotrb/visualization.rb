@@ -10,7 +10,7 @@ module Plotrb
     # @!attributes name
     #   @return [String] the name of the visualization
     # @!attributes width
-    #   @return [Integer] the total width of the data rectangle
+    #   @return [Integer] the total width of the data rectangle1
     # @!attributes height
     #   @return [Integer] the total height of the data rectangle
     # @!attributes viewport
@@ -42,6 +42,21 @@ module Plotrb
       else
         JSON.generate(self.collect_attributes)
       end
+    end
+
+    def output_server(plot_name)
+      require 'erb'
+      require 'net/http'
+
+      models = JSON.generate(self.collect_attributes)
+
+      path = File.dirname(__FILE__) + '/templates/embed.js.erb'
+      file = File.open(path, 'r')
+      template = file.read
+      generated_js = ERB.new(template).result(binding)
+
+      http = Net::HTTP.new('localhost',4567)
+      response = http.post('/post/'+plot_name, generated_js)
     end
 
   private

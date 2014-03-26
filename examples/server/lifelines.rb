@@ -1,4 +1,4 @@
-require 'plotrb'
+require 'plotrb.rb'
 
 people = pdata.name('people').values(
   [
@@ -103,4 +103,4 @@ vis = visualization.name('lifelines').width(400).height(100) do
   marks events_mark_t, events_mark_r, people_mark_t, people_mark_r, people_mark_r2
 end
 
-puts vis.generate_spec(:pretty)
+vis.output_server("lifelines")

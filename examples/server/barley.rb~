@@ -1,4 +1,4 @@
-require 'plotrb'
+require './lib/plotrb.rb'
 
 raw_data = pdata.name('barley').url('barley_data.json')
 variety = pdata.name('variety').source('barley').transform [

@@ -1,4 +1,4 @@
-require 'plotrb'
+require 'plotrb.rb'
 
 raw_data = pdata.name('barley').url('barley_data.json')
 variety = pdata.name('variety').source('barley').transform [
@@ -62,5 +62,5 @@ vis = visualization.width(200).height(720) do
   marks tm, gm
 end
 
-puts vis.generate_spec(:pretty)
+vis.output_server("barley")
 

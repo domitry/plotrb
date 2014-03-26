@@ -1,4 +1,4 @@
-require 'plotrb'
+require 'plotrb.rb'
 
 ump_data = pdata.name('unemp') do
 	url('unemployment.tsv')
@@ -45,4 +45,4 @@ vis = visualization.width(960).height(500) do
 	marks mark
 end
 
-puts vis.generate_spec(:pretty)
+vis.output_server("choropleth")
