@@ -9,6 +9,13 @@ class PlotrbApp < Sinatra::Base
       end
     end
 
+    def existing_file?(file_name)
+      Dir.glob(@data_dir + "/*.js").each do |path|
+        return true if file_name == path.match(/.+\/(.+?).js/)[1]
+      end
+      false
+    end
+
     def save_file(file_name, content)
       path = @data_dir + "/" + file_name
       file = File::open(path, "w")
@@ -30,7 +37,9 @@ class PlotrbApp < Sinatra::Base
   end
 
   get '/show/*' do |file_name|
-
+    @file_name = file_name
+    @file_path = @data_dir+"/"+file_name + ".js"
+    erb :plot_template
   end
 
   post '/post/*' do |file_name|

@@ -39,3 +39,8 @@ body {
     color: #fff;
     background-color: #428bca;
 }
+
+#plot_frame {
+    width: 100%;
+    border: none;
+}
