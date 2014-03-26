@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'rubygems' unless defined? ::Gem
+require File.dirname( __FILE__ ) + '/lib/server/app'
+
+port = 4567
+options = {}
+
+OptionParser.new do |opt|
+  opt.on('-D VALUE','directory for temporary files') do |v|
+    options[:data_dir] = v.to_s
+  end
+
+  opt.on('-p VALUE','port for plotrb-server') do |v|
+    port = v.to_i
+  end
+
+  opt.version = '0.0.1'
+  opt.parse(ARGV)
+end
+
+PlotrbApp.set(:plotrb_options,options)
+PlotrbApp.run! :port => port
