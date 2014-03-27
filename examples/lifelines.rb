@@ -1,4 +1,4 @@
-require 'plotrb'
+require './lib/plotrb.rb'
 
 people = pdata.name('people').values(
   [

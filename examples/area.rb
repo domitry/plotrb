@@ -1,4 +1,4 @@
-require 'plotrb'
+require './lib/plotrb.rb'
 
 data = pdata.name('table').values(
 	[

@@ -1,4 +1,4 @@
-require 'plotrb'
+require './lib/plotrb.rb'
 
 ump_data = pdata.name('unemp') do
 	url('unemployment.tsv')

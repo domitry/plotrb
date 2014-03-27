@@ -10,7 +10,7 @@ module Plotrb
     # @!attributes name
     #   @return [String] the name of the visualization
     # @!attributes width
-    #   @return [Integer] the total width of the data rectangle1
+    #   @return [Integer] the total width of the data rectangle
     # @!attributes height
     #   @return [Integer] the total height of the data rectangle
     # @!attributes viewport
