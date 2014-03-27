@@ -3,7 +3,7 @@ require 'erb'
 
 class PlotrbApp < Sinatra::Base
   helpers do
-    def show_files
+    def show_file_list
       Dir.glob(@data_dir + "/*.js").map do |path|
         path.match(/.+\/(.+?).js/)[1]
       end
@@ -36,9 +36,13 @@ class PlotrbApp < Sinatra::Base
     erb :index
   end
 
+  get '/show/js/*' do |file_name|
+    path = @data_dir+"/"+file_name + ".js"
+    send_file(path)
+  end
+
   get '/show/*' do |file_name|
     @file_name = file_name
-    @file_path = @data_dir+"/"+file_name + ".js"
     erb :plot_template
   end
 
