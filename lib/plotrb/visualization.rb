@@ -59,8 +59,7 @@ module Plotrb
       models = JSON.generate(self.collect_attributes)
 
       path = File.dirname(__FILE__) + '/templates/embed.js.erb'
-      file = File.open(path, 'r')
-      template = file.read
+      template = File.read(path)
       generated_js = ERB.new(template).result(binding)
 
       http = Net::HTTP.new('localhost',4567)
