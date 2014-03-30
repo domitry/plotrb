@@ -1,9 +1,0 @@
-define [
-        "parse/vega"
-        "parse/nvd3"
-], (parse_vega, parse_nvd3) ->
-        parse = (models) ->
-                spec = {}
-                spec.target = 
-                
-                return spec
