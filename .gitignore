@@ -9,6 +9,9 @@ _yardoc
 coverage
 doc/
 lib/bundler/man
+lib/plotrbjs/build
+lib/plotrbjs/node_modules
+
 pkg
 rdoc
 spec/reports

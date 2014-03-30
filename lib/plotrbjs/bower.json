@@ -1,0 +1,11 @@
+{
+  "name": "plotrbjs",
+  "version": "0.0.1",
+  "homepage": "https://github.com/domitry/plotrb",
+  "authors": [
+    "domitry <domitry@gmail.com>"
+  ],
+  "description": "the backend library of Plotrb",
+  "license": "MIT",
+  "private": true
+}
