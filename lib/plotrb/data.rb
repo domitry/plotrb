@@ -62,6 +62,16 @@ module Plotrb
       end
     end
 
+    def self.from_array(arr, option_args = {})
+      options = { name:'table' }.merge(option_args)
+      name = options[:name]
+      values = []
+      arr.each_with_index do |val, i|
+        values.push({'x' => i, 'y' => val})
+      end
+      data = self.new.name(name).values(values)
+    end
+
   private
 
     def attribute_post_processing
